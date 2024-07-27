@@ -22,6 +22,6 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build dictionary-jpa with Maven
+    - name: Build dictionary-jpa and execute integration tests with Maven
       run: mvn --file pom.xml -B clean verify
 
