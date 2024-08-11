@@ -1,4 +1,4 @@
-package rx.dictionary.vo;
+package io.github.rxue.dictionary.vo;
 
 public interface Keyword {
     String getLanguage();

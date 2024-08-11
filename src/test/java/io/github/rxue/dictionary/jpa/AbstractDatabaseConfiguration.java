@@ -1,4 +1,4 @@
-package rx.dictionary.jpa.repository;
+package io.github.rxue.dictionary.jpa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

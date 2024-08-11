@@ -1,8 +1,8 @@
-package rx.dictionary.jpa.entity;
+package io.github.rxue.dictionary.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import rx.dictionary.vo.Explanation;
+import io.github.rxue.dictionary.vo.Explanation;
 
 import java.util.HashSet;
 import java.util.Locale;

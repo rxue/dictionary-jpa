@@ -1,8 +1,8 @@
-package rx.dictionary.jpa.repository;
+package io.github.rxue.dictionary.jpa.repository;
 
 import jakarta.persistence.EntityManager;
-import rx.dictionary.jpa.entity.ExplanationEntity;
-import rx.dictionary.vo.Keyword;
+import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.vo.Keyword;
 
 import java.util.Collection;
 import java.util.List;

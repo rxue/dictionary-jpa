@@ -1,4 +1,4 @@
-package rx.dictionary.jpa;
+package io.github.rxue.dictionary.jpa;
 
 public class EntityManagerAddNewExplanationWillAutoRefreshIT extends AbstractDatabaseConfiguration {
     /**

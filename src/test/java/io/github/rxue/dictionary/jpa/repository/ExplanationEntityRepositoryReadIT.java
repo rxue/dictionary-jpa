@@ -1,17 +1,16 @@
-package rx.dictionary.jpa.repository;
+package io.github.rxue.dictionary.jpa.repository;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import rx.dictionary.jpa.entity.ExplanationEntity;
-import rx.dictionary.jpa.entity.LexicalItemEntity;
-import rx.dictionary.jpa.entity.PartOfSpeech;
-import rx.dictionary.vo.Keyword;
+import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
+import io.github.rxue.dictionary.vo.Keyword;
 
 import java.util.List;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static rx.dictionary.jpa.repository.ITUtil.*;
+import static io.github.rxue.dictionary.jpa.repository.ITUtil.*;
 
 public class ExplanationEntityRepositoryReadIT extends AbstractDatabaseConfiguration {
 

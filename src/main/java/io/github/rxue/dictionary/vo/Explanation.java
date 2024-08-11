@@ -1,6 +1,6 @@
-package rx.dictionary.vo;
+package io.github.rxue.dictionary.vo;
 
-import rx.dictionary.jpa.entity.PartOfSpeech;
+import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
 
 public interface Explanation {
     Long getId();

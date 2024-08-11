@@ -1,8 +1,8 @@
-package rx.dictionary.jpa.repository;
+package io.github.rxue.dictionary.jpa.repository;
 
-import rx.dictionary.jpa.entity.ExplanationEntity;
-import rx.dictionary.jpa.entity.LexicalItemEntity;
-import rx.dictionary.jpa.entity.PartOfSpeech;
+import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.LexicalItemEntity;
+import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
 import rx.transaction.jdbc.PreparedStatementExecutor;
 
 import java.sql.ResultSet;

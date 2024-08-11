@@ -1,11 +1,10 @@
-package rx.dictionary.jpa.repository;
+package io.github.rxue.dictionary.jpa.repository;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import rx.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

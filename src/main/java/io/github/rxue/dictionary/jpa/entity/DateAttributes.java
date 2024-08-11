@@ -1,4 +1,4 @@
-package rx.dictionary.jpa.entity;
+package io.github.rxue.dictionary.jpa.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

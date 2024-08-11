@@ -1,12 +1,11 @@
-package rx.dictionary.jpa.repository;
+package io.github.rxue.dictionary.jpa.repository;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import rx.dictionary.jpa.entity.LexicalItemEntity;
-import rx.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.LexicalItemEntity;
+import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
 
 import org.junit.jupiter.api.Test;
 
