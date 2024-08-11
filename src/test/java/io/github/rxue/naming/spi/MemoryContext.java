@@ -1,4 +1,4 @@
-package rx.naming.spi;
+package io.github.rxue.naming.spi;
 
 import javax.naming.*;
 import java.util.Enumeration;

@@ -1,7 +1,7 @@
-package rx.naming.spi;
+package io.github.rxue.naming.spi;
 
 import org.mariadb.jdbc.MariaDbDataSource;
-import rx.Util;
+import io.github.rxue.Util;
 
 import javax.naming.*;
 import javax.naming.spi.InitialContextFactory;

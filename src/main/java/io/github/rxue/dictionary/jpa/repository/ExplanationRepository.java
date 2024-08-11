@@ -14,6 +14,13 @@ public class ExplanationRepository {
         this.entityManager = entityManager;
     }
 
+    /**
+     * Find possible explanations on base of the given keyword and language
+     *
+     * @param keyword keyword
+     * @param definitionLanguage language for the explanation
+     * @return
+     */
     public List<ExplanationEntity> findLike(Keyword keyword, Locale definitionLanguage) {
         String jpql = "select e from ExplanationEntity e where " +
                 "e.lexicalItemEntity.language =: language and " +

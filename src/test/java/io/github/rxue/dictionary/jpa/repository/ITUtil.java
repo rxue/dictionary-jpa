@@ -3,7 +3,7 @@ package io.github.rxue.dictionary.jpa.repository;
 import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
 import io.github.rxue.dictionary.jpa.entity.LexicalItemEntity;
 import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
-import rx.transaction.jdbc.PreparedStatementExecutor;
+import io.github.rxue.transaction.jdbc.PreparedStatementExecutor;
 
 import java.sql.ResultSet;
 import java.util.*;

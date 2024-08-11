@@ -1,4 +1,4 @@
-package rx;
+package io.github.rxue;
 
 import jakarta.transaction.UserTransaction;
 

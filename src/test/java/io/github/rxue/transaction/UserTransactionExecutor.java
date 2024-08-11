@@ -1,9 +1,9 @@
-package rx.transaction;
+package io.github.rxue.transaction;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.transaction.*;
-import rx.Util;
+import io.github.rxue.Util;
 
 import java.util.function.Consumer;
 

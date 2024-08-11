@@ -7,9 +7,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.utility.DockerImageName;
-import rx.Util;
-import rx.transaction.jdbc.PreparedStatementExecutor;
-import rx.transaction.UserTransactionExecutor;
+import io.github.rxue.Util;
+import io.github.rxue.transaction.jdbc.PreparedStatementExecutor;
+import io.github.rxue.transaction.UserTransactionExecutor;
 
 import java.util.Collections;
 import java.util.function.Consumer;

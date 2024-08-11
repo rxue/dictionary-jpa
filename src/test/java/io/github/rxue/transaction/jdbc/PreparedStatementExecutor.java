@@ -1,4 +1,4 @@
-package rx.transaction.jdbc;
+package io.github.rxue.transaction.jdbc;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

@@ -4,6 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+/**
+ * Generate database schema
+ */
 public class Main {
     public static void main(String[] args) {
         System.out.println("Going to generate database schema!");
