@@ -11,8 +11,20 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.developers>Rui Xue</project.developers>
     </properties>
+    <scm>
+        <connection>scm:git:git://github.com/rxue/dictionary-jpa.git</connection>
+        <developerConnection>scm:git:ssh://github.com:rxue/dictionary-jpa.git</developerConnection>
+        <url>http://github.com/rxue/dictionary-jpa/tree/main</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>rxue</id>
+            <name>Rui Xue</name>
+            <email>ruixue.fi@gmail.com</email>
+            <url>https://github.com/rxue</url>
+        </developer>
+    </developers>
     <dependencyManagement>
         <dependencies>
             <dependency>
