@@ -2,5 +2,7 @@ package io.github.rxue.dictionary.jpa.repository;
 
 import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
 
-record ExplanationVO(LexicalItemVO lexicalItemVO, String language, PartOfSpeech partOfSpeech, String definition) {
+import java.util.Locale;
+
+record ExplanationVO(LexicalItemVO lexicalItemVO, Locale language, PartOfSpeech partOfSpeech, String definition) {
 }

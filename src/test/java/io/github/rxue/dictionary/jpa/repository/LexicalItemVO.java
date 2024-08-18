@@ -1,4 +1,6 @@
 package io.github.rxue.dictionary.jpa.repository;
 
-record LexicalItemVO(String language, String value) {
+import java.util.Locale;
+
+record LexicalItemVO(Locale language, String value) {
 }

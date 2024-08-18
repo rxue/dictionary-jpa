@@ -1,7 +1,7 @@
 package io.github.rxue.dictionary.jpa.repository;
 
-import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
-import io.github.rxue.dictionary.jpa.entity.LexicalItemEntity;
+import io.github.rxue.dictionary.jpa.entity.Explanation;
+import io.github.rxue.dictionary.jpa.entity.LexicalItem;
 import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
 import io.github.rxue.transaction.jdbc.PreparedStatementExecutor;
 
@@ -33,12 +33,12 @@ class ITUtil {
         return localeString.replace("_", "-");
     }
 
-    static List<ExplanationEntity> getAllExplanations(PreparedStatementExecutor preparedStatementExecutor, String lexicalItemValue) {
-        final LexicalItemEntity existingItem = preparedStatementExecutor.executeAndReturn("select * from lexical_item where value = ?", preparedStatement -> {
+    static List<Explanation> getAllExplanations(PreparedStatementExecutor preparedStatementExecutor, String lexicalItemValue) {
+        final LexicalItem existingItem = preparedStatementExecutor.executeAndReturn("select * from lexical_item where value = ?", preparedStatement -> {
             preparedStatement.setString(1, lexicalItemValue);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    LexicalItemEntity lexicalItem = new LexicalItemEntity(resultSet.getLong("id"));
+                    LexicalItem lexicalItem = new LexicalItem(resultSet.getLong("id"));
                     String languageTag = languageLocaleStringToTag(resultSet.getString("language"));
                     lexicalItem.setLanguage(Locale.forLanguageTag(languageTag));
                     lexicalItem.setValue(resultSet.getString("value"));
@@ -50,16 +50,16 @@ class ITUtil {
         return preparedStatementExecutor.executeAndReturn("select * from explanation where lexical_item_id = ?", preparedStatement -> {
             preparedStatement.setLong(1, existingItem.getId());
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                List<ExplanationEntity> result = new ArrayList<>();
+                List<Explanation> result = new ArrayList<>();
                 while (resultSet.next()) {
-                    ExplanationEntity explanationEntity = new ExplanationEntity(resultSet.getLong("id"), existingItem);
+                    Explanation explanationEntity = new Explanation(resultSet.getLong("id"), existingItem);
                     String languageTag = languageLocaleStringToTag(resultSet.getString("language"));
                     explanationEntity.setLanguage(Locale.forLanguageTag(languageTag));
                     explanationEntity.setPartOfSpeech(PartOfSpeech.valueOf(resultSet.getString("partOfSpeech")));
                     explanationEntity.setDefinition(resultSet.getString("definition"));
                     result.add(explanationEntity);
                 }
-                return result.stream().sorted(Comparator.comparing(ExplanationEntity::getDefinition))
+                return result.stream().sorted(Comparator.comparing(Explanation::getDefinition))
                         .toList();
             }
         });
@@ -83,9 +83,9 @@ class ITUtil {
             }
         });
     }
-    static ExplanationVO toExplanationVO(ExplanationEntity explanationEntity) {
-        LexicalItemEntity lexicalItemEntity = explanationEntity.getLexicalItemEntity();
-        LexicalItemVO lexicalItemVO = new LexicalItemVO(lexicalItemEntity.getLanguage(), lexicalItemEntity.getValue());
+    static ExplanationVO toExplanationVO(Explanation explanationEntity) {
+        LexicalItem lexicalItem = explanationEntity.getLexicalItem();
+        LexicalItemVO lexicalItemVO = new LexicalItemVO(lexicalItem.getLanguage(), lexicalItem.getValue());
         return new ExplanationVO(lexicalItemVO, explanationEntity.getLanguage(), explanationEntity.getPartOfSpeech(), explanationEntity.getDefinition());
     }
 }

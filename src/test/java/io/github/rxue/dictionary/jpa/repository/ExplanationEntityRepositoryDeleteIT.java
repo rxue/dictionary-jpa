@@ -2,7 +2,7 @@ package io.github.rxue.dictionary.jpa.repository;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.Explanation;
 
 import java.util.List;
 
@@ -17,16 +17,16 @@ public class ExplanationEntityRepositoryDeleteIT extends AbstractDatabaseConfigu
     }
     @Test
     public void deleteExplanationById() {
-        final List<ExplanationEntity> explanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "test");
+        final List<Explanation> explanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "test");
         final int originalExplanationSize = explanationEntities.size();
-        ExplanationEntity explanationEntityToDelete = explanationEntities.stream().findAny().get();
+        Explanation explanationEntityToDelete = explanationEntities.stream().findAny().get();
         //ACT
         userTransactionExecutor.execute(entityManager -> {
             ExplanationRepository out = new ExplanationRepository(entityManager);
             out.deleteById(explanationEntityToDelete.getId());
         });
         //ASSERT
-        List<ExplanationEntity> explanationsAfterDelete = ITUtil.getAllExplanations(preparedStatementExecutor, "test");
+        List<Explanation> explanationsAfterDelete = ITUtil.getAllExplanations(preparedStatementExecutor, "test");
         assertEquals(originalExplanationSize-1, explanationsAfterDelete.size());
     }
 }

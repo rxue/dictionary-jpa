@@ -6,8 +6,17 @@
 
     <groupId>io.github.rxue</groupId>
     <artifactId>dictionary-jpa</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
+    <version>1.1</version>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A permissive license that allows for commercial use, modification, and distribution.</comments>
+        </license>
+    </licenses>
+    <description>dictionary-jpa - jpa entities of dictionary domain along with some repositories</description>
+    <url>https://github.com/rxue/dictionary-jpa</url>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>

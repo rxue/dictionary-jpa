@@ -1,8 +1,9 @@
 package io.github.rxue.dictionary.jpa.entity;
 
+import io.github.rxue.dictionary.vo.Keyword;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import io.github.rxue.dictionary.vo.LexicalItem;
+import io.github.rxue.dictionary.dto.LexicalItemDTO;
 
 import java.util.Locale;
 
@@ -12,24 +13,30 @@ import java.util.Locale;
 uniqueConstraints = {
         @UniqueConstraint(columnNames = {"language", "value"})
 })
-public class LexicalItemEntity extends AbstractEntity implements LexicalItem {
+public class LexicalItem extends AbstractEntity implements LexicalItemDTO, Keyword {
     @Column(nullable=false)
     private Locale language;
     @Column(nullable=false)
     private String value;
     //Merely for testing purpose
-    public LexicalItemEntity(Long id) {
+    public LexicalItem(Long id) {
         this.id = id;
     }
-    public LexicalItemEntity() {
+    public LexicalItem() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getLanguage() {
-        return language.toString();
+    @Override
+    public String getLanguageTag() {
+        return language.toLanguageTag();
+    }
+
+    @Override
+    public Locale getLanguage() {
+        return language;
     }
 
     public String getValue() {

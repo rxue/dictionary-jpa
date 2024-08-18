@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import io.github.rxue.dictionary.jpa.entity.LexicalItemEntity;
-import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.LexicalItem;
+import io.github.rxue.dictionary.jpa.entity.Explanation;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,18 +26,18 @@ public class ExplanationEntityRepositoryUpdateIT extends AbstractDatabaseConfigu
     @Test
     public void cascadeUpdate_base() {
         //PREPARE
-        final List<ExplanationEntity> explanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "test");
-        ExplanationEntity explanationEntityToUpdate = explanationEntities.stream().findAny().get();
+        final List<Explanation> explanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "test");
+        Explanation explanationEntityToUpdate = explanationEntities.stream().findAny().get();
         //ACT
         userTransactionExecutor.execute(entityManager -> {
-            LexicalItemEntity lexicalItem = explanationEntityToUpdate.getLexicalItemEntity();
+            LexicalItem lexicalItem = explanationEntityToUpdate.getLexicalItem();
             lexicalItem.setValue("test after update");
             explanationEntityToUpdate.setDefinition("updated explanation");
             ExplanationRepository out = new ExplanationRepository(entityManager);
             out.cascadeUpdate(explanationEntities.stream().toList());
         });
         //ASSERT
-        final List<ExplanationEntity> updatedExplanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "test after update");
+        final List<Explanation> updatedExplanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "test after update");
         assertEquals(3, updatedExplanationEntities.size());
         assertTrue(updatedExplanationEntities.stream().anyMatch(e -> "updated explanation".equals(e.getDefinition())));
     }

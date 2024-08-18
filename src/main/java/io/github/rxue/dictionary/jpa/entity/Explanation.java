@@ -2,7 +2,7 @@ package io.github.rxue.dictionary.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import io.github.rxue.dictionary.vo.Explanation;
+import io.github.rxue.dictionary.dto.ExplanationDTO;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -14,14 +14,14 @@ import static jakarta.persistence.FetchType.EAGER;
 @Table(name = "explanation", uniqueConstraints = { @UniqueConstraint(columnNames = { "lexical_item_id", "language", "partofspeech", "definition"}) })
 @SequenceGenerator(sequenceName = "explanation_id_seq", initialValue=1, name = "explanation_sequence", allocationSize = 4)
 @Entity
-public class ExplanationEntity implements Explanation {
+public class Explanation implements ExplanationDTO {
 
     @Id
     @GeneratedValue(generator="explanation_sequence", strategy=GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="lexical_item_id")
-    private LexicalItemEntity lexicalItemEntity;
+    private LexicalItem lexicalItem;
     @Column(nullable = false)
     private Locale language;
     @Enumerated(EnumType.STRING)
@@ -34,22 +34,22 @@ public class ExplanationEntity implements Explanation {
     @Embedded
     private DateAttributes dateAttributes;
 
-    public ExplanationEntity(Long id, LexicalItemEntity lexicalItemEntity) {
+    public Explanation(Long id, LexicalItem lexicalItem) {
         this.id = id;
-        this.lexicalItemEntity = lexicalItemEntity;
+        this.lexicalItem = lexicalItem;
     }
-    public ExplanationEntity() {}
+    public Explanation() {}
 
-    public LexicalItemEntity getLexicalItemEntity() {
-        return lexicalItemEntity;
+    public LexicalItem getLexicalItem() {
+        return lexicalItem;
     }
     @Override
     public Long getId() {
         return id;
     }
 
-    public String getLanguage() {
-        return language.toString();
+    public Locale getLanguage() {
+        return language;
     }
     public void setLanguage(Locale language) {
         this.language = language;

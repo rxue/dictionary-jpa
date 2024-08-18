@@ -2,7 +2,7 @@ package io.github.rxue.dictionary.jpa.repository;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import io.github.rxue.dictionary.jpa.entity.ExplanationEntity;
+import io.github.rxue.dictionary.jpa.entity.Explanation;
 import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
 import io.github.rxue.dictionary.vo.Keyword;
 
@@ -54,8 +54,8 @@ public class ExplanationEntityRepositoryReadIT extends AbstractDatabaseConfigura
             Keyword keyword = new Keyword() {
 
                 @Override
-                public String getLanguage() {
-                    return Locale.ENGLISH.toString();
+                public Locale getLanguage() {
+                    return Locale.ENGLISH;
                 }
 
                 @Override
@@ -63,12 +63,12 @@ public class ExplanationEntityRepositoryReadIT extends AbstractDatabaseConfigura
                     return "test";
                 }
             };
-            List<ExplanationEntity> result = out.findLike(keyword, Locale.SIMPLIFIED_CHINESE);
+            List<Explanation> result = out.findLike(keyword, Locale.SIMPLIFIED_CHINESE);
             assertEquals(2, result.size());
-            final ExplanationEntity firstExplanationEntity = result.get(0);
-            LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH.toString(), "test");
+            final Explanation firstExplanationEntity = result.get(0);
+            LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH, "test");
             assertEquals(new ExplanationVO(expectedLexicalItem,
-                    Locale.SIMPLIFIED_CHINESE.toString(), PartOfSpeech.N, "测试 1"), toExplanationVO(firstExplanationEntity));
+                    Locale.SIMPLIFIED_CHINESE, PartOfSpeech.N, "测试 1"), toExplanationVO(firstExplanationEntity));
         });
     }
 

@@ -1,6 +1,8 @@
 package io.github.rxue.dictionary.vo;
 
+import java.util.Locale;
+
 public interface Keyword {
-    String getLanguage();
+    Locale getLanguage();
     String getValue();
 }
