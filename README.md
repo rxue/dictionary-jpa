@@ -1,4 +1,7 @@
-# Repository Design with JPA
+[![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)][license]
+
+
+## Repository Design with JPA
 ## Interface design: `LexicalItemRepository` and `ExplanationRepository`
 
 Think first from the frontend point of view:
