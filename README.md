@@ -1,8 +1,8 @@
 dictionary-jpa
 ======================
 
-[![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)][license]
-[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-jar-plugin.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.rxue/dictionary-jpa§)
+![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-jar-plugin.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.rxue/dictionary-jpa)
 
 ## Repository Design with JPA
 ## Interface design: `LexicalItemRepository` and `ExplanationRepository`
