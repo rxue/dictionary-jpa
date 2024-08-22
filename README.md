@@ -13,7 +13,11 @@ dictionary-jpa
 Pre-requisite: Generation of the database schema needs a database. The database should be configured either on base of https://github.com/rxue/dictionary-jpa/blob/main/src/main/resources/META-INF/persistence.xml or user should overwrite the properties in the `peristence.xml` through command line below
 
 1. Download the *uber-JAR* from https://repo1.maven.org/maven2/io/github/rxue/dictionary-jpa/1.4/dictionary-jpa-1.4-uber.jar
-2. run command: `java -jar dictionary-jpa-1.4-uber.jar` or `java -D<property> -jar dictionary-jpa-1.4-uber.jar` to overwrite the properties in [persistence.xml](https://github.com/rxue/dictionary-jpa/blob/main/src/main/resources/META-INF/persistence.xml) 
+2. run command in the dictionary of the *uber-JAR*: `java -Djakarta.persistence.schema-generation.database.action=create -jar dictionary-jpa-1.4-uber.jar` with a database configured on base of the default properties in [persistence.xml](https://github.com/rxue/dictionary-jpa/blob/main/src/main/resources/META-INF/persistence.xml) embedded inside the *uber-JAR*. NOTE that the value of `jakarta.persistence.schema-generation.action` has to be set to `create` since the default value is `none`, which would not generate database schema
+
+Examples commands of running the `dictionary-jpa-1.4-uber.jar` with properties overwriting the properties in the default [persistence.xml](https://github.com/rxue/dictionary-jpa/blob/main/src/main/resources/META-INF/persistence.xml) embedded inside the *uber-JAR*:
+* `java jakarta.persistence.schema-generation.database.action=create -Djakarta.persistence.jdbc.password=1234 -jar dictionary-jpa-1.4-uber.jar` : password of the `root` user of the target database is `1234`
+
 
 ## How to use the normal jar in a Maven project
 add the following block to `pom.xml`
