@@ -15,6 +15,16 @@ Pre-requisite: Generation of the database schema needs a database. The database 
 1. Download the *uber-JAR* from https://repo1.maven.org/maven2/io/github/rxue/dictionary-jpa/1.4/dictionary-jpa-1.4-uber.jar
 2. run command: `java -jar dictionary-jpa-1.4-uber.jar` or `java -D<property> -jar dictionary-jpa-1.4-uber.jar` to overwrite the properties in [persistence.xml](https://github.com/rxue/dictionary-jpa/blob/main/src/main/resources/META-INF/persistence.xml) 
 
+## How to use the normal jar in a Maven project
+add the following block to `pom.xml`
+
+```
+<dependency>
+    <groupId>io.github.rxue</groupId>
+    <artifactId>dictionary-jpa</artifactId>
+    <version>1.4</version>
+</dependency>
+```
 
 ## Repository Design with JPA
 ## Interface design: `LexicalItemRepository` and `ExplanationRepository`
