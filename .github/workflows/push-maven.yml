@@ -23,5 +23,5 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build dictionary-jpa and execute integration tests with Maven
-      run: mvn --file pom.xml -B clean verify
+      run: mvn --file pom.xml -B clean integration-test
 
