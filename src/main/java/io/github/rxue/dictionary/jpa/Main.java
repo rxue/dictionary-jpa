@@ -12,6 +12,7 @@ import java.util.Properties;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Going to generate database schema!");
+        System.out.println("test property value is " + System.getProperty("test"));
         Persistence.generateSchema("dictionary", overwrittenHibernateAndJPAProperties());
     }
     private static Map overwrittenHibernateAndJPAProperties() {

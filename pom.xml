@@ -96,33 +96,38 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.4.2</version>
                 <configuration>
                     <excludes>
                         <exclude>META-INF/persistence.xml</exclude>
+                        <exclude>io/github/rxue/dictionary/jpa/Main.class</exclude>
+                        <exclude>assembly/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.6.0</version>
+            <!-- NOTE: We don't need a groupId specification because the group is
+                 org.apache.maven.plugins ...which is assumed by default.
+             -->
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
                 <configuration>
-                    <shadedArtifactAttached>true</shadedArtifactAttached>
-                    <shadedClassifierName>uber</shadedClassifierName>
-                    <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <descriptors>
+                        <descriptor>src/main/resources/assembly/uber.xml</descriptor>
+                    </descriptors>
+                    <archive>
+                        <manifest>
                             <mainClass>io.github.rxue.dictionary.jpa.Main</mainClass>
-                        </transformer>
-                    </transformers>
+                        </manifest>
+                    </archive>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
