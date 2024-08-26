@@ -6,7 +6,7 @@
 
     <groupId>io.github.rxue</groupId>
     <artifactId>dictionary-jpa</artifactId>
-    <version>1.5.10</version>
+    <version>1.5.11</version>
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -146,7 +146,7 @@
                 <version>0.5.0</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <publishingServerId>central</publishingServerId>
+                    <publishingServerId>ossrh</publishingServerId>
                 </configuration>
             </plugin>
             <plugin>
