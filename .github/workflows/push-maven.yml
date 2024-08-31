@@ -29,7 +29,9 @@ jobs:
        cp -r target/apidocs .
        git config --global user.email "ruixue.fi@gmail.com"
        git config --global user.name "Rui Xue"
-       git add apidocs/*
+       if [[ ! `git branch |grep gh-pages` ]]; then git checkout --orphan gh-pages; fi
+       git branch
+       git checkout main -- apidoc .
        git commit -m "add apidoc to gh-pages"
        git push origin gh-pages
       
