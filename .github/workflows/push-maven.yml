@@ -27,6 +27,8 @@ jobs:
     - name: add Javadoc to gh-pages branch
       run: |
        cp -r target/apidocs .
-       ls .
+       git add apidocs/*
+       git commit -m "add apidoc to gh-pages"
+       git push origin gh-pages
       
 
