@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build project
+        with:
+          java-version: '17'
+          distribution: 'temurin'
         run: mvn clean package
       - name: Generate Javadoc
         run: mvn javadoc:jar
