@@ -1,0 +1,21 @@
+name: Generate Javadoc
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build project
+        run: mvn clean package
+      - name: Generate Javadoc
+        run: mvn javadoc:jar
+      - name: Upload Javadoc to GitHub Pages
+        uses: actions/upload-artifact@v3
+        with:
+          name: javadoc
+          path: target/site/apidocs
