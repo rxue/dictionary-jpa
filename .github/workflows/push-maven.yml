@@ -43,4 +43,5 @@ jobs:
        git add dictionary-jpa/apidocs/*
        git commit -m "add dictionary-jpa/apidocs"
        git push origin gh-pages
-
+      with:
+        token: ${{ secrets.GH_PAT }}
