@@ -25,6 +25,8 @@ jobs:
     - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
       run: |
        mvn --file pom.xml -B clean package
+       echo "list files in main branch#######################"
+       ls -al
        #cp -r target/apidocs .
        git config --global user.email "ruixue.fi@gmail.com"
        git config --global user.name "Rui Xue"
