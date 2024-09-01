@@ -31,7 +31,7 @@ jobs:
        echo "list files in current gh-pages branch#######################"
        ls -al
        git rm -rf src
-       git rm pom.xml
+       git rm -f pom.xml
        git rm README.md
        git add apidocs/*
        echo "directory state after checkout apidocs"
