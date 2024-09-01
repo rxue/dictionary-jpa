@@ -9,11 +9,19 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout main
+      uses: actions/checkout@v4
+      with:
+        path: main
+    - name: Checkout rxue.github.io
+      uses: actions/checkout@v4
+      with:
+        repository: rxue/rxue.github.io
+        path: my-homepage
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
@@ -23,17 +31,8 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
       run: |
+       ls -al
        git config user.name "Rui Xue Bot"
        git config user.email "ruixue.fi@gmail.com"
-       if [[ ! `git branch |grep gh-pages` ]]; then git checkout --orphan gh-pages; fi
-       mvn --file pom.xml -B clean package
-       git rm -rf src
-       git rm -f pom.xml
-       git rm -f README.md
-       mv target/apidocs .
-       git add apidocs/*
-       echo "directory state after checkout apidocs"
-       git commit -m "add apidoc to gh-pages"
-       git push origin gh-pages
       
 
