@@ -33,6 +33,7 @@ jobs:
         pwd
         ls -al /home/runner
         ls -al /home/runner/work
+        ls -al /home/runner/work/dictionary-jpa
 #       cd main
 #       mvn clean package
 #       cd ../rxue.github.io
