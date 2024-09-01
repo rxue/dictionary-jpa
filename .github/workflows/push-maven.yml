@@ -22,10 +22,9 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build dictionary-jpa and execute integration tests with Maven
-      run: mvn --file pom.xml -B clean package
-    - name: add Javadoc to gh-pages branch
+    - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
       run: |
+       mvn --file pom.xml -B clean package
        #cp -r target/apidocs .
        git config --global user.email "ruixue.fi@gmail.com"
        git config --global user.name "Rui Xue"
