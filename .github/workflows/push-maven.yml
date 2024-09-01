@@ -35,8 +35,8 @@ jobs:
        git checkout main -- apidoc .
        echo "directory state after checkout apidoc"
        ls -al
-       git add .
-       git commit -m "add apidoc to gh-pages"
-       git push origin gh-pages
+       #git add .
+       #git commit -m "add apidoc to gh-pages"
+       #git push origin gh-pages
       
 
