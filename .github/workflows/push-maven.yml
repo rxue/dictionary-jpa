@@ -13,8 +13,8 @@ jobs:
       packages: write
 
     steps:
-    - name: Checkout main
-      uses: actions/checkout@v4
+      #- name: Checkout main
+      #uses: actions/checkout@v4
     - name: Checkout rxue.github.io
       uses: actions/checkout@v4
       with:
