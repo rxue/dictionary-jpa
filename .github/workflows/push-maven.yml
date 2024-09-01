@@ -21,7 +21,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: rxue/rxue.github.io
-        path: my-homepage
+        path: rxue.github.io
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
@@ -31,8 +31,11 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
       run: |
-       ls -al
+       cd main
+       mvn clean package
+       cd rxue.github.io
+       cp ../main/target/apidocs .
        git config user.name "Rui Xue Bot"
        git config user.email "ruixue.fi@gmail.com"
-      
+       
 
