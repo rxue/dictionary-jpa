@@ -35,7 +35,8 @@ jobs:
        mvn clean package
        cd ../rxue.github.io
        mkdir dictionary-jpa
-       cp ../main/target/apidocs dictionary-jpa/
+       cp -r ../main/target/apidocs dictionary-jpa/
+       ls -al dictionary-jpa/
        git config user.name "Rui Xue Bot"
        git config user.email "ruixue.fi@gmail.com"
        git add dictionary-jpa/apidocs/*
