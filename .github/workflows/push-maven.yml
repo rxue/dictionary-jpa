@@ -15,8 +15,6 @@ jobs:
     steps:
     - name: Checkout main
       uses: actions/checkout@v4
-      with:
-        path: main
     - name: Checkout rxue.github.io
       uses: actions/checkout@v4
       with:
@@ -33,7 +31,8 @@ jobs:
     - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
       run: |
         pwd
-        ls -al
+        ls -al /home/runner
+        ls -al /home/runner/work
         ls /home/.ssh
 #       cd main
 #       mvn clean package
