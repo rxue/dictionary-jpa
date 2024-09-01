@@ -13,6 +13,10 @@ jobs:
       packages: write
 
     steps:
+    - name: Checkout current repository
+      uses: actions/checkout@v4
+      with:
+        path: current
     - name: Checkout rxue.github.io
       uses: actions/checkout@v4
       with:
@@ -30,11 +34,14 @@ jobs:
     - name: check host file system structure
       run: |
         pwd
-        #ls -alR /home
-        cd rxue.github.io
+        cd current
+        mvn clean package
+        cd ../rxue.github.io
+        mkdir dictionary-jpa
+        cd dictionary-jpa
+        cp -r ../../current/target/apidocs .
         git config user.name "Rui Xue - Bot"
         git config user.email "ruixue.fi@gmail.com"
-        echo "test" > test.txt
-        git add test.txt
-        git commit -m "add file to rxue.github.io repo in current repo - dictionary-jpa"
+        git add apidocs/*
+        git commit -m "add dictionary-jpa/apidoc to rxue.github.io repo so that it can be browsed through browser"
         git push origin gh-pages
