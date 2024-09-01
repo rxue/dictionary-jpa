@@ -29,7 +29,7 @@ jobs:
     - name: check host file system structure
       run: |
         pwd
-        ls -alR /home
+        #ls -alR /home
         cd rxue.github.io
         git config user.name "Rui Xue - Bot"
         git config user.email "ruixue.fi@gmail.com"
