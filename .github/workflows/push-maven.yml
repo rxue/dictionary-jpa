@@ -31,7 +31,10 @@ jobs:
        git config --global user.name "Rui Xue"
        if [[ ! `git branch |grep gh-pages` ]]; then git checkout --orphan gh-pages; fi
        git rm -rf .
+       ls -al
        git checkout main -- apidoc .
+       echo "directory state after checkout apidoc"
+       ls -al
        git add .
        git commit -m "add apidoc to gh-pages"
        git push origin gh-pages
