@@ -32,8 +32,8 @@ jobs:
        if [[ ! `git branch |grep gh-pages` ]]; then git checkout --orphan gh-pages; fi
        git rm -rf .
        ls -al
-       git checkout main -- apidoc .
-       echo "directory state after checkout apidoc"
+       git checkout main -- apidocs .
+       echo "directory state after checkout apidocs"
        ls -al
        #git add .
        #git commit -m "add apidoc to gh-pages"
