@@ -34,7 +34,7 @@ jobs:
       run: |
         pwd
         ls -al
-        ls ~/.ssh
+        ls /home/.ssh
 #       cd main
 #       mvn clean package
 #       cd ../rxue.github.io
