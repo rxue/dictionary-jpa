@@ -21,6 +21,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: rxue/rxue.github.io
+        ref: gh-pages
         path: rxue.github.io
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -37,9 +38,9 @@ jobs:
        mkdir dictionary-jpa
        cp -r ../main/target/apidocs dictionary-jpa/
        ls -al dictionary-jpa/
-       git config user.name "Rui Xue Bot"
+       git config user.name "Rui Xue - Bot"
        git config user.email "ruixue.fi@gmail.com"
-       echo "current branch in git repo rxue.github.io::::::::::::::::::::::::::"
-       git branch
        git add dictionary-jpa/apidocs/*
+       git commit -m "add dictionary-jpa/apidocs"
+       git push origin gh-pages
 
