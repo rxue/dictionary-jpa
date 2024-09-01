@@ -20,7 +20,7 @@ jobs:
     - name: Checkout rxue.github.io
       uses: actions/checkout@v4
       with:
-        repository: rxue/rxue.github.i
+        repository: rxue/rxue.github.io
         path: rxue.github.io
     - name: Set up JDK 17
       uses: actions/setup-java@v3
