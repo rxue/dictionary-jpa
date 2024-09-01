@@ -32,10 +32,10 @@ jobs:
        ls -al
        git rm -rf src
        git rm -f pom.xml
-       git rm README.md
+       git rm -f README.md
        git add apidocs/*
        echo "directory state after checkout apidocs"
-       #git commit -m "add apidoc to gh-pages"
-       #git push origin gh-pages
+       git commit -m "add apidoc to gh-pages"
+       git push origin gh-pages
       
 
