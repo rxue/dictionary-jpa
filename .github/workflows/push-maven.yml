@@ -18,7 +18,7 @@ jobs:
       with:
         repository: rxue/rxue.github.io
         ref: gh-pages
-        token: ${{ secrets.GH_PAT }}
+        token: ${{ github.token }}
         path: rxue.github.io
     - name: Set up JDK 17
       uses: actions/setup-java@v3
