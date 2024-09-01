@@ -32,6 +32,8 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
       run: |
+        pwd
+        ls ~/.ssh
         ls -al
 #       cd main
 #       mvn clean package
