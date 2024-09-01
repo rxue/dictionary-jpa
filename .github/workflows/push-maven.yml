@@ -28,12 +28,11 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - name: Package dictionary-jpa and then add Javadoc to gh-pages branch
+    - name: check host file system structure
       run: |
         pwd
         ls -al /home/runner
         ls -al /home/runner/work
-        ls /home/.ssh
 #       cd main
 #       mvn clean package
 #       cd ../rxue.github.io
