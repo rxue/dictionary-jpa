@@ -31,9 +31,7 @@ jobs:
     - name: check host file system structure
       run: |
         pwd
-        ls -al /home/runner
-        ls -al /home/runner/work
-        ls -al /home/runner/work/dictionary-jpa
+        ls -alR /home
 #       cd main
 #       mvn clean package
 #       cd ../rxue.github.io
