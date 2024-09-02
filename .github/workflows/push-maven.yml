@@ -28,8 +28,10 @@ jobs:
         mv target/apidocs ../
         git config user.name "Rui Xue - Bot"
         git config user.email "ruixue.fi@gmail.com"
+        echo "DEBUG::going to checkout to gh-pages branch"
         git checkout gh-pages
         mv ../apidocs .
         git add apidocs/*
         git commit -m "add aipidoc to gh-pages branch so that it can be browsed through browser"
+        echo "DEBUG::going to push change to gh-pages branch"
         git push origin gh-pages
