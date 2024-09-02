@@ -31,6 +31,7 @@ jobs:
           ref: gh-pages
     - name: Generate Java Doc and then copy it to gh-pages branch
       run: |
+        pwd
         ls -al
         echo "DEBUG::going to list branches"
         #git branch
