@@ -15,11 +15,11 @@ public class ExplanationRepository {
     }
 
     /**
-     * Find possible explanations on base of the given keyword and language
+     * Finds possible explanations on base of the given keyword and language
      *
      * @param keyword keyword
      * @param definitionLanguage language for the explanation
-     * @return
+     * @return list of explanations
      */
     public List<Explanation> findLike(Keyword keyword, Locale definitionLanguage) {
         String jpql = "select e from Explanation e where " +
@@ -33,21 +33,30 @@ public class ExplanationRepository {
                 .getResultList();
     }
 
+    /**
+     * Updates the given collection of explanations in cascade
+     *
+     * @param explanationEntities
+     */
     public void cascadeUpdate(Collection<Explanation> explanationEntities) {
         explanationEntities.forEach(entityManager::merge);
     }
 
+    /**
+     * Deletes an explanation
+     * @param id the id of the explanation to delete
+     */
     public void deleteById(Long id) {
         Explanation managedExplanationEntity = entityManager.find(Explanation.class, id);
         entityManager.remove(managedExplanationEntity);
     }
 
+    /**
+     * Adds the given collection of explanations in cascade
+     *
+     * @param explanationEntities
+     */
     public void cascadeAdd(Collection<Explanation> explanationEntities) {
         explanationEntities.forEach(entityManager::merge);
     }
-    private static Locale toLanguageLocale(String languageLocaleString) {
-        String languageTag = languageLocaleString.replace("_", "-");
-        return Locale.forLanguageTag(languageTag);
-    }
-
 }
