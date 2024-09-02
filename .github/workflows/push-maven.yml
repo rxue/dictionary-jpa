@@ -37,6 +37,7 @@ jobs:
         cp -r ../main/target/apidocs .
         git config user.name "Rui Xue - Bot"
         git config user.email "ruixue.fi@gmail.com"
+        git add apidocs/*
         echo "DEBUG::going to commit apidocs files"
         git commit -m "add aipidoc to gh-pages branch so that it can be browsed through browser"
         echo "DEBUG::going to push change to gh-pages branch"
