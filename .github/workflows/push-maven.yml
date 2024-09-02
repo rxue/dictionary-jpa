@@ -20,10 +20,18 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - name: Checkout current repository
+    - name: Checkout current main branch
       uses: actions/checkout@v4
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v4
+      with:
+          path: gh-pages
+          ref: gh-pages
     - name: Generate Java Doc and then copy it to gh-pages branch
       run: |
+        ls -al
+        echo "DEBUG::going to list branches"
+        git branch
         mvn clean package
         mv target/apidocs ../
         git config user.name "Rui Xue - Bot"
