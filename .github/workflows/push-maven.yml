@@ -34,7 +34,7 @@ jobs:
         cd main
         mvn clean package -DskipTests
         cd ../gh-pages
-        mv ../main/target/apidocs .
+        cp -r ../main/target/apidocs .
         git config user.name "Rui Xue - Bot"
         git config user.email "ruixue.fi@gmail.com"
         echo "DEBUG::going to commit apidocs files"
