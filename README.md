@@ -2,7 +2,7 @@ dictionary-jpa
 ======================
 
 ![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-1.5.23-green)](https://central.sonatype.com/artifact/io.github.rxue/dictionary-jpa)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-1.6-blue)](https://central.sonatype.com/artifact/io.github.rxue/dictionary-jpa)
 
 *dictionary-jpa* generates 2 types of jars with different usage
 * *uber-JAR* whose name ends with `-uber` after the version number: used to generate dictionary  database schema
