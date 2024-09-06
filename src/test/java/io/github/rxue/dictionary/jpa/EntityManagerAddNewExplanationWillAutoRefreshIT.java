@@ -1,6 +1,8 @@
 package io.github.rxue.dictionary.jpa;
 
-public class EntityManagerAddNewExplanationWillAutoRefreshIT extends AbstractDatabaseConfiguration {
+import io.github.rxue.dictionary.jpa.repository.AbstractITConfiguration;
+
+public class EntityManagerAddNewExplanationWillAutoRefreshIT extends AbstractITConfiguration {
     /**
     @Test
     public void testUpdate() {

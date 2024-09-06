@@ -6,7 +6,7 @@
 
     <groupId>io.github.rxue</groupId>
     <artifactId>dictionary-jpa</artifactId>
-    <version>1.6</version>
+    <version>1.5.25</version>
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -78,6 +78,12 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>mariadb</artifactId>
             <version>1.18.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>yasson</artifactId>
+            <version>3.0.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

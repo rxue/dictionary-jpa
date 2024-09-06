@@ -1,5 +1,6 @@
 package io.github.rxue.dictionary.jpa.repository;
 
+import jakarta.json.bind.JsonbException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import io.github.rxue.dictionary.jpa.entity.Explanation;
@@ -12,8 +13,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
 import static io.github.rxue.dictionary.jpa.repository.ITUtil.*;
 
-public class ExplanationEntityRepositoryReadIT extends AbstractDatabaseConfiguration {
-
+public class ExplanationEntityRepositoryReadIT extends AbstractITConfiguration {
     @BeforeAll
     public static void insert() {
         final Long generatedId = generateLexicalItem(preparedStatementExecutor, Locale.ENGLISH, "test");
@@ -69,6 +69,7 @@ public class ExplanationEntityRepositoryReadIT extends AbstractDatabaseConfigura
             LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH, "test");
             assertEquals(new ExplanationVO(expectedLexicalItem,
                     Locale.SIMPLIFIED_CHINESE, PartOfSpeech.N, "测试 1"), toExplanationVO(firstExplanationEntity));
+            assertThrows(JsonbException.class, () -> jsonb.toJson(result.get(0)));
         });
     }
 

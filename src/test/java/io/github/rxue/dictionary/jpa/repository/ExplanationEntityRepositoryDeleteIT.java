@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ExplanationEntityRepositoryDeleteIT extends AbstractDatabaseConfiguration {
+public class ExplanationEntityRepositoryDeleteIT extends AbstractITConfiguration {
 
     @BeforeAll
     public static void insert() {

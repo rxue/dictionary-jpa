@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static io.github.rxue.dictionary.jpa.repository.ITUtil.*;
 
-public class ExplanationEntityRepositoryCreateIT extends AbstractDatabaseConfiguration {
+public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration {
     @AfterEach
     public void truncateTables() {
         ITUtil.truncateTables(preparedStatementExecutor);
