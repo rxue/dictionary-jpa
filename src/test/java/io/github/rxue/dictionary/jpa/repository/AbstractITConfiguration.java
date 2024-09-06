@@ -1,4 +1,4 @@
-package io.github.rxue.dictionary.jpa;
+package io.github.rxue.dictionary.jpa.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -14,14 +14,14 @@ import io.github.rxue.transaction.UserTransactionExecutor;
 import java.util.Collections;
 import java.util.function.Consumer;
 
-public abstract class AbstractDatabaseConfiguration {
+public abstract class AbstractPrsistenceLevelConfiguration {
     protected static EntityManagerFactory entityManagerFactory;
     private static MariaDBContainer<?> db;
     protected static PreparedStatementExecutor preparedStatementExecutor;
     protected static UserTransactionExecutor userTransactionExecutor;
 
     @BeforeAll
-    protected static void init() {
+    protected static void initPersistenceLevel() {
         db = new MariaDBContainer<>(DockerImageName.parse("mariadb:10.5.8"));
         System.setProperty("port", "3307");
         db.setPortBindings(Collections.singletonList(Util.getPortNumber() + ":3306"));
