@@ -47,6 +47,33 @@ public class ExplanationEntityRepositoryReadIT extends AbstractITConfiguration {
 
     }
     @Test
+    public void lazyFindLike_base() {
+        //ACT
+        userTransactionExecutor.execute(entityManager -> {
+            ExplanationRepository out = new ExplanationRepository(entityManager);
+            Keyword keyword = new Keyword() {
+
+                @Override
+                public Locale getLanguage() {
+                    return Locale.ENGLISH;
+                }
+
+                @Override
+                public String getValue() {
+                    return "test";
+                }
+            };
+            List<Explanation> result = out.lazyFindLike(keyword, Locale.SIMPLIFIED_CHINESE);
+            assertEquals(2, result.size());
+            final Explanation firstExplanationEntity = result.get(0);
+            LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH, "test");
+            assertEquals(new ExplanationVO(expectedLexicalItem,
+                    Locale.SIMPLIFIED_CHINESE, PartOfSpeech.N, "测试 1"), toExplanationVO(firstExplanationEntity));
+            assertThrows(JsonbException.class, () -> jsonb.toJson(result.get(0)));
+        });
+    }
+
+    @Test
     public void findLike_base() {
         //ACT
         userTransactionExecutor.execute(entityManager -> {
@@ -69,7 +96,7 @@ public class ExplanationEntityRepositoryReadIT extends AbstractITConfiguration {
             LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH, "test");
             assertEquals(new ExplanationVO(expectedLexicalItem,
                     Locale.SIMPLIFIED_CHINESE, PartOfSpeech.N, "测试 1"), toExplanationVO(firstExplanationEntity));
-            assertThrows(JsonbException.class, () -> jsonb.toJson(result.get(0)));
+            assertNotNull(jsonb.toJson(result.get(0)));
         });
     }
 
