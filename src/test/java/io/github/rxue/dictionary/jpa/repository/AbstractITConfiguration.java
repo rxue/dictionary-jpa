@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.function.Consumer;
 
 public abstract class AbstractITConfiguration {
-    private static EntityManagerFactory entityManagerFactory;
     private static MariaDBContainer<?> db;
+    protected static EntityManagerFactory entityManagerFactory;
     protected static PreparedStatementExecutor preparedStatementExecutor;
     protected static UserTransactionExecutor userTransactionExecutor;
     protected static Jsonb jsonb;

@@ -3,7 +3,6 @@ package io.github.rxue.dictionary.jpa.entity;
 import io.github.rxue.dictionary.vo.Keyword;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import io.github.rxue.dictionary.dto.LexicalItemDTO;
 
 import java.util.Locale;
 
@@ -13,7 +12,7 @@ import java.util.Locale;
 uniqueConstraints = {
         @UniqueConstraint(columnNames = {"language", "value"})
 })
-public class LexicalItem extends AbstractEntity implements LexicalItemDTO, Keyword {
+public class LexicalItem extends AbstractEntity implements Keyword {
     @Column(nullable=false)
     private Locale language;
     @Column(nullable=false)
@@ -27,11 +26,6 @@ public class LexicalItem extends AbstractEntity implements LexicalItemDTO, Keywo
 
     public Long getId() {
         return id;
-    }
-
-    @Override
-    public String getLanguageTag() {
-        return language.toLanguageTag();
     }
 
     @Override
@@ -49,10 +43,5 @@ public class LexicalItem extends AbstractEntity implements LexicalItemDTO, Keywo
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return false;
     }
 }

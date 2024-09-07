@@ -2,7 +2,6 @@ package io.github.rxue.dictionary.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import io.github.rxue.dictionary.dto.ExplanationDTO;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -14,7 +13,7 @@ import static jakarta.persistence.FetchType.EAGER;
 @Table(name = "explanation", uniqueConstraints = { @UniqueConstraint(columnNames = { "lexical_item_id", "language", "partofspeech", "definition"}) })
 @SequenceGenerator(sequenceName = "explanation_id_seq", initialValue=1, name = "explanation_sequence", allocationSize = 4)
 @Entity
-public class Explanation implements ExplanationDTO {
+public class Explanation {
 
     @Id
     @GeneratedValue(generator="explanation_sequence", strategy=GenerationType.SEQUENCE)
@@ -38,12 +37,20 @@ public class Explanation implements ExplanationDTO {
         this.id = id;
         this.lexicalItem = lexicalItem;
     }
+
+    /**
+     * Construct a new Explanation with a given LexicalItem
+     *
+     * @param lexicalItem
+     */
+    public Explanation(LexicalItem lexicalItem) {
+        this(null, lexicalItem);
+    }
     public Explanation() {}
 
     public LexicalItem getLexicalItem() {
         return lexicalItem;
     }
-    @Override
     public Long getId() {
         return id;
     }
@@ -54,14 +61,12 @@ public class Explanation implements ExplanationDTO {
     public void setLanguage(Locale language) {
         this.language = language;
     }
-    @Override
     public PartOfSpeech getPartOfSpeech() {
         return partOfSpeech;
     }
     public void setPartOfSpeech(PartOfSpeech partOfSpeech) {
         this.partOfSpeech = partOfSpeech;
     }
-    @Override
     public String getDefinition() {
         return definition;
     }

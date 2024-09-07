@@ -1,91 +1,95 @@
 package io.github.rxue.dictionary.jpa.repository;
 
+import io.github.rxue.Util;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import io.github.rxue.dictionary.jpa.entity.Explanation;
 import io.github.rxue.dictionary.jpa.entity.LexicalItem;
 import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
 
-import java.sql.ResultSet;
 import java.util.*;
-import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static io.github.rxue.dictionary.jpa.repository.ITUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration {
     @AfterEach
     public void truncateTables() {
         ITUtil.truncateTables(preparedStatementExecutor);
     }
+    private static void beginTransaction(UserTransaction tx) {
+        try {
+            tx.begin();
+        } catch (NotSupportedException | SystemException e) {
+            throw new RuntimeException("Transaction fails to begin", e);
+        }
+    }
+    private static void commitTransaction(UserTransaction tx) {
+        try {
+            tx.commit();
+        } catch (RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException e) {
+            throw new RuntimeException("Transaction fails to commit", e);
+        }
+    }
 
     @Test
     public void testCreate_addNewLexicalItemWithOneExplanation() {
+        //PREPARE
+        LexicalItem l = new LexicalItem();
+        l.setLanguage(Locale.ENGLISH);
+        l.setValue("take");
+        Explanation newExplanationEntity = new Explanation(l);
+        newExplanationEntity.setLanguage(Locale.SIMPLIFIED_CHINESE);
+        newExplanationEntity.setPartOfSpeech(PartOfSpeech.VT);
+        newExplanationEntity.setDefinition("行动");
         //ACT
-        userTransactionExecutor.execute(entityManager -> {
-                    LexicalItem l = new LexicalItem();
-                    l.setLanguage(Locale.ENGLISH);
-                    l.setValue("take");
-                    Explanation explanationEntity = new Explanation(null, l);
-                    explanationEntity.setLanguage(Locale.SIMPLIFIED_CHINESE);
-                    explanationEntity.setPartOfSpeech(PartOfSpeech.VT);
-                    explanationEntity.setDefinition("行动");
+        UserTransaction tx = Util.userTransaction();
+        List<Explanation> returnedExplanations;
+        beginTransaction(tx);
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             ExplanationRepository out = new ExplanationRepository(entityManager);
-            out.cascadeAdd(List.of(explanationEntity));
-        });
-        //ASSERT
-        final Explanation explanationEntity = ITUtil.getAllExplanations(preparedStatementExecutor, "take")
-                .stream().findAny().get();
-        LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH, "take");
-        assertEquals(new ExplanationVO(expectedLexicalItem, Locale.SIMPLIFIED_CHINESE, PartOfSpeech.VT, "行动"), toExplanationVO(explanationEntity));
+            returnedExplanations = out.cascadeAdd(List.of(newExplanationEntity));
+        }
+        commitTransaction(tx);
+        //VERIFY + ASSERT
+        jsonb.toJson(returnedExplanations.get(0));
+        assertEqualExplanations(ITUtil.getAllExplanations(preparedStatementExecutor, "take"), returnedExplanations);
     }
     @Test
     public void testCreate_addNewLexicalItemWith2Explanations() {
         //PREPARE
-        Supplier<Collection<Explanation>> prepareExplanations = () -> {
-            LexicalItem l = new LexicalItem();
-            l.setLanguage(Locale.ENGLISH);
-            l.setValue("take");
-            Explanation explanationEntity = new Explanation(null, l);
-            explanationEntity.setLanguage(Locale.SIMPLIFIED_CHINESE);
-            explanationEntity.setPartOfSpeech(PartOfSpeech.VT);
-            explanationEntity.setDefinition("test explanation 1");
-            Explanation explanationEntity2 = new Explanation(null, l);
-            explanationEntity2.setLanguage(Locale.SIMPLIFIED_CHINESE);
-            explanationEntity2.setPartOfSpeech(PartOfSpeech.N);
-            explanationEntity2.setDefinition("test explanation 2");
-            return List.of(explanationEntity, explanationEntity2);
-        };
+        LexicalItem l = new LexicalItem();
+        l.setLanguage(Locale.ENGLISH);
+        l.setValue("take");
+        Explanation explanationEntity = new Explanation(l);
+        explanationEntity.setLanguage(Locale.SIMPLIFIED_CHINESE);
+        explanationEntity.setPartOfSpeech(PartOfSpeech.VT);
+        explanationEntity.setDefinition("test explanation 1");
+        Explanation explanationEntity2 = new Explanation(l);
+        explanationEntity2.setLanguage(Locale.SIMPLIFIED_CHINESE);
+        explanationEntity2.setPartOfSpeech(PartOfSpeech.N);
+        explanationEntity2.setDefinition("test explanation 2");
+        List<Explanation> explanationsToAdd = List.of(explanationEntity, explanationEntity2);
         //ACT
-        userTransactionExecutor.execute(entityManager -> {
+        UserTransaction tx = Util.userTransaction();
+        List<Explanation> returnedExplanations;
+        beginTransaction(tx);
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             ExplanationRepository out = new ExplanationRepository(entityManager);
-            out.cascadeAdd(prepareExplanations.get());
-        });
-
-        //ASSERT
-        final List<LexicalItem> existingItems = preparedStatementExecutor.executeAndReturn("select * from lexical_item", preparedStatement -> {
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                List<LexicalItem> createdItems = new ArrayList<>();
-                while (resultSet.next()) {
-                    LexicalItem lexicalItem = new LexicalItem(resultSet.getLong("id"));
-                    lexicalItem.setLanguage(Locale.forLanguageTag(resultSet.getString("language")));
-                    lexicalItem.setValue(resultSet.getString("value"));
-                    createdItems.add(lexicalItem);
-                }
-                return createdItems;
-            }
-        });
-        List<Explanation> addedExplanationEntities = ITUtil.getAllExplanations(preparedStatementExecutor, "take");
-        LexicalItemVO expectedLexicalItem = new LexicalItemVO(Locale.ENGLISH, "take");
-        ExplanationVO expectedExplanation = new ExplanationVO(expectedLexicalItem, Locale.SIMPLIFIED_CHINESE, PartOfSpeech.VT, "test explanation 1");
-
-        ExplanationVO expectedExplanation2 = new ExplanationVO(expectedLexicalItem, Locale.SIMPLIFIED_CHINESE, PartOfSpeech.N, "test explanation 2");
-        List<ExplanationVO> expectedExplanations = List.of(expectedExplanation, expectedExplanation2);
-        int i = 0;
-        for (ExplanationVO explanationEntity : expectedExplanations) {
-                assertEquals(explanationEntity, toExplanationVO(addedExplanationEntities.get(i++)));
+            returnedExplanations = out.cascadeAdd(explanationsToAdd);
         }
-
+        commitTransaction(tx);
+        assertEqualExplanations(ITUtil.getAllExplanations(preparedStatementExecutor, "take"), returnedExplanations);
+    }
+    private static void assertEqualExplanations(List<Explanation> expected, List<Explanation> actual) {
+        Iterator<Explanation> returnedExplanationsItr = expected.iterator();
+        Iterator<Explanation> persistedExplanationsItr = actual.iterator();
+        while (returnedExplanationsItr.hasNext() && persistedExplanationsItr.hasNext()) {
+            Explanation persisted = persistedExplanationsItr.next();
+            Explanation returned = returnedExplanationsItr.next();
+            assertEquals(persisted, returned);
+        }
     }
 
 }

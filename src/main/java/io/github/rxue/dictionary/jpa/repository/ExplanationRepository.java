@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import io.github.rxue.dictionary.jpa.entity.Explanation;
 import io.github.rxue.dictionary.vo.Keyword;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -18,11 +19,11 @@ public class ExplanationRepository {
     }
 
     /**
-     * Finds possible explanations on base of the given keyword and language
+     * Lazily finds possible explanations on base of the given keyword and language
      *
      * @param keyword keyword
      * @param definitionLanguage language for the explanation
-     * @return list of explanations
+     * @return list of explanations, NOTE! that they are the proxies of JPA entity due to lazy fetch and would cause serialization error when using Jsonb to convert results to json
      */
     public List<Explanation> lazyFindLike(Keyword keyword, Locale definitionLanguage) {
         String jpql = JPQL_SELECT_EXPLANATION +
@@ -33,7 +34,13 @@ public class ExplanationRepository {
         return query(jpql, keyword, definitionLanguage);
     }
 
-
+    /**
+     * Eagerly finds possible explanations on base of the given keyword and language
+     *
+     * @param keyword keyword
+     * @param definitionLanguage language for the explanation
+     * @return list of explanations
+     */
     public List<Explanation> findLike(Keyword keyword, Locale definitionLanguage) {
         String jpql = JPQL_SELECT_EXPLANATION + " left join fetch e.lexicalItem l " +
                 " where " +
@@ -73,8 +80,11 @@ public class ExplanationRepository {
      *
      * @param explanationEntities
      */
-    public void cascadeAdd(Collection<Explanation> explanationEntities) {
-        explanationEntities.forEach(entityManager::merge);
+    public List<Explanation> cascadeAdd(Collection<Explanation> explanationEntities) {
+        List<Explanation> result = new ArrayList<>();
+        for (Explanation e : explanationEntities)
+            result.add(entityManager.merge(e));
+        return result;
     }
 
 }
