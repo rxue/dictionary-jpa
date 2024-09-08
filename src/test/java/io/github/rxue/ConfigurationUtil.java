@@ -2,8 +2,8 @@ package io.github.rxue;
 
 import jakarta.transaction.UserTransaction;
 
-public class Util {
-    private Util() {}
+public class ConfigurationUtil {
+    private ConfigurationUtil() {}
     public static UserTransaction userTransaction() {
         return com.arjuna.ats.jta.UserTransaction.userTransaction();
     }
@@ -15,7 +15,7 @@ public class Util {
         return "3306";
     }
     public static String getJdbcURL() {
-        return "jdbc:mariadb://localhost:" + Util.getPortNumber() + "/test";
+        return "jdbc:mariadb://localhost:" + ConfigurationUtil.getPortNumber() + "/test";
     }
 
 

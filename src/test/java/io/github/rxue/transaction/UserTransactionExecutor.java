@@ -3,7 +3,7 @@ package io.github.rxue.transaction;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.transaction.*;
-import io.github.rxue.Util;
+import io.github.rxue.ConfigurationUtil;
 
 import java.util.function.Consumer;
 
@@ -14,7 +14,7 @@ public class UserTransactionExecutor {
     }
 
     public void execute(Consumer<EntityManager> operations) {
-        UserTransaction tx = Util.userTransaction();
+        UserTransaction tx = ConfigurationUtil.userTransaction();
         try {
             tx.begin();
         } catch (NotSupportedException | SystemException e) {

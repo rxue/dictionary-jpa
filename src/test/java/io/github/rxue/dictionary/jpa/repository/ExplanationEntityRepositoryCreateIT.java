@@ -1,6 +1,6 @@
 package io.github.rxue.dictionary.jpa.repository;
 
-import io.github.rxue.Util;
+import io.github.rxue.ConfigurationUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.*;
 import org.junit.jupiter.api.AfterEach;
@@ -44,7 +44,7 @@ public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration
         newExplanationEntity.setPartOfSpeech(PartOfSpeech.VT);
         newExplanationEntity.setDefinition("行动");
         //ACT
-        UserTransaction tx = Util.userTransaction();
+        UserTransaction tx = ConfigurationUtil.userTransaction();
         List<Explanation> returnedExplanations;
         beginTransaction(tx);
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
@@ -72,7 +72,7 @@ public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration
         explanationEntity2.setDefinition("test explanation 2");
         List<Explanation> explanationsToAdd = List.of(explanationEntity, explanationEntity2);
         //ACT
-        UserTransaction tx = Util.userTransaction();
+        UserTransaction tx = ConfigurationUtil.userTransaction();
         List<Explanation> returnedExplanations;
         beginTransaction(tx);
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
