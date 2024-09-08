@@ -42,10 +42,10 @@ public class ExplanationRepository {
      * @return list of explanations
      */
     public List<Explanation> findLike(Keyword keyword, Locale definitionLanguage) {
-        String jpql = JPQL_SELECT_EXPLANATION + " left join fetch e.lexicalItem l " +
+        String jpql = JPQL_SELECT_EXPLANATION + " left join fetch e.lexicalItem " +
                 " where " +
-                "l.language =: language and " +
-                "l.value like :value and " +
+                "e.lexicalItem.language =: language and " +
+                "e.lexicalItem.value like :value and " +
                 JPQL_EXPLANATION_LANGUAGE_MATCH;
         return query(jpql, keyword, definitionLanguage);
     }
