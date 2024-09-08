@@ -1,5 +1,4 @@
-io.github.rxue.dictionary.dto
+io.github.rxue.dictionary
 io.github.rxue.dictionary.jpa
 io.github.rxue.dictionary.jpa.entity
 io.github.rxue.dictionary.jpa.repository
-io.github.rxue.dictionary.vo
