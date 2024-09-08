@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.github.rxue.dictionary.dto"},{"l":"io.github.rxue.dictionary.jpa"},{"l":"io.github.rxue.dictionary.jpa.entity"},{"l":"io.github.rxue.dictionary.jpa.repository"},{"l":"io.github.rxue.dictionary.vo"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.github.rxue.dictionary.jpa"},{"l":"io.github.rxue.dictionary.jpa.entity"},{"l":"io.github.rxue.dictionary.jpa.repository"},{"l":"io.github.rxue.dictionary.vo"}];updateSearchResults();
