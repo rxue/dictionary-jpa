@@ -1,4 +1,4 @@
-package io.github.rxue.dictionary.vo;
+package io.github.rxue.dictionary;
 
 import java.util.Locale;
 

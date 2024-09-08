@@ -2,7 +2,7 @@ package io.github.rxue.dictionary.jpa.repository;
 
 import jakarta.persistence.EntityManager;
 import io.github.rxue.dictionary.jpa.entity.Explanation;
-import io.github.rxue.dictionary.vo.Keyword;
+import io.github.rxue.dictionary.Keyword;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import io.github.rxue.dictionary.jpa.entity.Explanation;
 import io.github.rxue.dictionary.jpa.entity.PartOfSpeech;
-import io.github.rxue.dictionary.vo.Keyword;
+import io.github.rxue.dictionary.Keyword;
 
 import java.util.List;
 import java.util.Locale;
