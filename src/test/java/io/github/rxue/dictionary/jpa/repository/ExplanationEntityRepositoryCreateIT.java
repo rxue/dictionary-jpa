@@ -18,6 +18,7 @@ public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration
     public void truncateTables() {
         ITUtil.truncateTables(preparedStatementExecutor);
     }
+
     private static void beginTransaction(UserTransaction tx) {
         try {
             tx.begin();
@@ -25,6 +26,7 @@ public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration
             throw new RuntimeException("Transaction fails to begin", e);
         }
     }
+
     private static void commitTransaction(UserTransaction tx) {
         try {
             tx.commit();
@@ -56,6 +58,7 @@ public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration
         jsonb.toJson(returnedExplanations.get(0));
         assertEqualExplanations(ITUtil.getAllExplanations(preparedStatementExecutor, "take"), returnedExplanations);
     }
+
     @Test
     public void testCreate_addNewLexicalItemWith2Explanations() {
         //PREPARE
@@ -82,6 +85,26 @@ public class ExplanationEntityRepositoryCreateIT extends AbstractITConfiguration
         commitTransaction(tx);
         assertEqualExplanations(ITUtil.getAllExplanations(preparedStatementExecutor, "take"), returnedExplanations);
     }
+
+    @Test
+    public void testCreate_addNewLexicalItemWithOneExplanationWithoutTransactionContext() {
+        //PREPARE
+        LexicalItem l = new LexicalItem();
+        l.setLanguage(Locale.ENGLISH);
+        l.setValue("take");
+        Explanation newExplanationEntity = new Explanation(l);
+        newExplanationEntity.setLanguage(Locale.SIMPLIFIED_CHINESE);
+        newExplanationEntity.setPartOfSpeech(PartOfSpeech.VT);
+        newExplanationEntity.setDefinition("行动");
+        //ACT        commitTransaction(tx);
+        List<Explanation> returnedExplanations;
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+            ExplanationRepository out = new ExplanationRepository(entityManager);
+            assertThrows(AssertionError.class, () -> out.cascadeAdd(List.of(newExplanationEntity)));
+        }
+    }
+
+
     private static void assertEqualExplanations(List<Explanation> expected, List<Explanation> actual) {
         Iterator<Explanation> returnedExplanationsItr = expected.iterator();
         Iterator<Explanation> persistedExplanationsItr = actual.iterator();

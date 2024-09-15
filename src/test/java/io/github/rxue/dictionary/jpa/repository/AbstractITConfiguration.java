@@ -35,12 +35,7 @@ public abstract class AbstractITConfiguration {
         userTransactionExecutor = new UserTransactionExecutor(entityManagerFactory);
         jsonb = JsonbBuilder.create();
     }
-
-
-    public void execute(Consumer<EntityManager> operations) {
-        userTransactionExecutor.execute(operations);
-    }
-
+    
     @AfterAll
     protected static void destroy() {
         if (entityManagerFactory != null) entityManagerFactory.close();

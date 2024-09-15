@@ -1,14 +1,15 @@
 package io.github.rxue.dictionary.jpa.repository;
 
+import io.github.rxue.dictionary.jpa.entity.LexicalItem;
 import jakarta.persistence.EntityManager;
 import io.github.rxue.dictionary.jpa.entity.Explanation;
 import io.github.rxue.dictionary.Keyword;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
+/**
+ * NOTE! all parameters in methods cannot be null
+ */
 public class ExplanationRepository {
     private static final String JPQL_EXPLANATION_ALIAS = "e";
     private static final String JPQL_SELECT_EXPLANATION = "select " + JPQL_EXPLANATION_ALIAS + " from Explanation " + JPQL_EXPLANATION_ALIAS;
@@ -76,15 +77,34 @@ public class ExplanationRepository {
     }
 
     /**
-     * Adds the given collection of explanations in cascade
+     * Adds the given collection of explanations (for one lexical item) in cascade
      *
      * @param explanationEntities
      */
     public List<Explanation> cascadeAdd(Collection<Explanation> explanationEntities) {
+        Objects.requireNonNull(explanationEntities);
+        if (explanationEntities.isEmpty())
+            throw new IllegalArgumentException("No sense to add an empty collection of Explanations to persistence store");
+        preVerifyAdd(explanationEntities);
         List<Explanation> result = new ArrayList<>();
         for (Explanation e : explanationEntities)
             result.add(entityManager.merge(e));
+        postVerifyAdd(result);
         return result;
+    }
+    private static void preVerifyAdd(Collection<Explanation> explanationEntities) {
+        Explanation anyNewExplanation = explanationEntities.stream().findAny().get();
+        assert anyNewExplanation.getId() == null : "explanations to add have to be all new";
+        final LexicalItem anyLexicalItem = anyNewExplanation.getLexicalItem();
+        explanationEntities.forEach(e -> {
+            assert anyLexicalItem == e.getLexicalItem() : "All lexical items used of the given collection of new explanations have to be identical";
+        });
+    }
+    private static void postVerifyAdd(List<Explanation> result) {
+        Explanation firstPersistedExplanation = result.get(0);
+        LexicalItem lexicalItem = firstPersistedExplanation.getLexicalItem();
+        assert lexicalItem.getId() != null;
+        assert firstPersistedExplanation.getId() != null;
     }
 
 }
